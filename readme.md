@@ -289,13 +289,13 @@ You can customize the appearance of all your cards however you wish with URL par
 >
 > | Card Type | Default | Minimum (`cache_seconds`) | Maximum (`cache_seconds`) |
 > | --- | --- | --- | --- |
-> | [Stats Card](#github-stats-card) | 24 hours (86400) | 12 hours (43200) | 48 hours (172800) |
-> | [Top Languages Card](#top-languages-card) | 6 days (518400) | 2 days (172800) | 10 days (864000) |
-> | [Repo Pin Card](#github-extra-pins) | 10 days (864000) | 1 day (86400) | 10 days (864000) |
-> | [Gist Pin Card](#github-gist-pins) | 2 days (172800) | 1 day (86400) | 10 days (864000) |
-> | [WakaTime Card](#wakatime-stats-card) | 1 day (86400) | 12 hours (43200) | 48 hours (172800) |
+> | [Stats Card](#github-stats-card) | 12 hours (43200) | 12 hours (43200) | 48 hours (172800) |
+> | [Top Languages Card](#top-languages-card) | 2 days (172800) | 2 days (172800) | 10 days (864000) |
+> | [Repo Pin Card](#github-extra-pins) | 1 day (86400) | 1 day (86400) | 10 days (864000) |
+> | [Gist Pin Card](#github-gist-pins) | 1 day (86400) | 1 day (86400) | 10 days (864000) |
+> | [WakaTime Card](#wakatime-stats-card) | 12 hours (43200) | 12 hours (43200) | 48 hours (172800) |
 >
-> For example, the stats card has a default cache of 24 hours. This means after your latest commit, it can take up to 24 hours for the updated stats to appear on your README. You can reduce this by setting the `cache_seconds` query parameter (e.g., `&cache_seconds=43200` for 12 hours on the stats card), but it cannot be set below the minimum for each card type.
+> For example, the stats card has a default cache of 12 hours. This means after your latest commit, it can take up to 12 hours for the updated stats to appear on your README. The default for each card is already set to the lowest allowed value.
 >
 > If you want the data on your cards to be updated more often, you can [deploy your own instance](#deploy-on-your-own) and set the [environment variable](#available-environment-variables) `CACHE_SECONDS` to a value of your choosing.
 >
