@@ -280,12 +280,26 @@ You can customize the appearance of all your cards however you wish with URL par
 | `bg_color` | Card's background color. | string (hex color or a gradient in the form of *angle,start,end*) | `fffefe` |
 | `hide_border` | Hides the card's border. | boolean | `false` |
 | `theme` | Name of the theme, choose from [all available themes](themes/README.md). | enum | `default` |
-| `cache_seconds` | Sets the cache header manually (min: 21600, max: 86400). | integer | `21600` |
+| `cache_seconds` | Sets the cache header manually *(min/max values vary by card type, see below)*. | integer | card-specific |
 | `locale` | Sets the language in the card, you can check full list of available locales [here](#available-locales). | enum | `en` |
 | `border_radius` | Corner rounding on the card. | number | `4.5` |
 
 > [!WARNING]
-> We use caching to decrease the load on our servers (see <https://github.com/anuraghazra/github-readme-stats/issues/1471#issuecomment-1271551425>). Our cards have the following default cache hours: stats card - 24 hours, top languages card - 144 hours (6 days), pin card - 240 hours (10 days), gist card - 48 hours (2 days), and wakatime card - 24 hours. If you want the data on your cards to be updated more often you can [deploy your own instance](#deploy-on-your-own) and set [environment variable](#available-environment-variables) `CACHE_SECONDS` to a value of your choosing.
+> We use caching to decrease the load on our servers (see <https://github.com/anuraghazra/github-readme-stats/issues/1471#issuecomment-1271551425>). This means that after you make new commits, it will take some time before the changes are reflected on your cards. The table below shows the default, minimum, and maximum cache durations for each card type:
+>
+> | Card Type | Default | Minimum (`cache_seconds`) | Maximum (`cache_seconds`) |
+> | --- | --- | --- | --- |
+> | [Stats Card](#github-stats-card) | 12 hours (43200) | 12 hours (43200) | 48 hours (172800) |
+> | [Top Languages Card](#top-languages-card) | 2 days (172800) | 2 days (172800) | 10 days (864000) |
+> | [Repo Pin Card](#github-extra-pins) | 1 day (86400) | 1 day (86400) | 10 days (864000) |
+> | [Gist Pin Card](#github-gist-pins) | 1 day (86400) | 1 day (86400) | 10 days (864000) |
+> | [WakaTime Card](#wakatime-stats-card) | 12 hours (43200) | 12 hours (43200) | 48 hours (172800) |
+>
+> For example, the stats card has a default cache of 12 hours. This means after your latest commit, it can take up to 12 hours for the updated stats to appear on your README. The default for each card is already set to the lowest allowed value.
+>
+> If you want the data on your cards to be updated more often, you can [deploy your own instance](#deploy-on-your-own) and set the [environment variable](#available-environment-variables) `CACHE_SECONDS` to a value of your choosing.
+>
+> Additionally, GitHub caches images served on README pages via its [camo proxy](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-anonymized-urls), which may add a short delay on top of the card cache duration.
 
 ##### Gradient in bg\_color
 
@@ -949,7 +963,7 @@ GitHub Readme Stats provides several environment variables that can be used to c
   <tbody>
     <tr>
       <td><code>CACHE_SECONDS</code></td>
-      <td>Sets the cache duration in seconds for the generated cards. This variable takes precedence over the default cache timings for the public instance. If this variable is not set, the default cache duration is 24 hours (86,400 seconds).</td>
+      <td>Sets the cache duration in seconds for all generated cards. This variable takes precedence over the per-card default and min/max cache limits (see <a href="#common-options">Common Options</a>). If not set, each card type uses its own default (e.g. 24 hours for the stats card).</td>
       <td>Any positive integer or <code>0</code> to disable caching</td>
     </tr>
     <tr>
